@@ -105,7 +105,7 @@ echo "#{fs_type} creation return:  $?" >> disk_operation_log.txt
 # Create mountpoint #{mnt_point}
 [ -d #{mnt_point} ] || mkdir -p #{mnt_point}
 # Update fstab with new mountpoint name
-[[ `grep -i #{device} /etc/fstab` ]] || echo #{device} #{mnt_point} #{fs_type} #{mnt_options.join(',')} 0 0 >> /etc/fstab
+[[ `grep -i #{mnt_point} /etc/fstab` ]] || echo LABEL=#{mnt_point} #{mnt_point} #{fs_type} #{mnt_options.join(',')} 0 0 >> /etc/fstab
 echo "fstab update returned:  $?" >> disk_operation_log.txt
 # Finally, mount the partition
 [[ `mount | grep #{mnt_point}` ]] || mount #{mnt_point}
